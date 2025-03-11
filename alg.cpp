@@ -75,14 +75,15 @@ public:
 			log1.add("Here's some space! Check if it's enough...", 1);
 			if(checkEnough(vrM.RAM_V, vrM.CPU_V))
 			{
-				log1.add("Enough space! Check efficiency of operation...", 1);
-				//efficiency check
+				log1.add("Enough space! Adding...", 1);
+				vMachines.push_back(vrM);
+				RAM_curr -= vrM.RAM_V;
+				CPU_curr -= vrM.CPU_V;
 				return true;
 			}
 			else 
 			{
-				log1.add("Not enough space!", 0);
-				//replace check
+				log1.add("Not enough space! Check if some VM can be replaced", 0);
 				return false;
 			}
 		}
@@ -157,7 +158,12 @@ int main()
 
 	for(int k = 0; k < hostList.size(); k++)
 	{
-		std::cout << "Host #" << k + 1 << "\nCPU: " << hostList[k].CPU_curr << "\nRAM: " << hostList[k].RAM_curr << "\n\n";
+		std::cout << "Host #" << k + 1 << "\nCPU: " << hostList[k].CPU_curr << "\nRAM: " << hostList[k].RAM_curr;
+		std::cout << "\n\nvMachines: ";
+		for(int e = 0; e < hostList[k].vMachines.size(); e++)
+		{
+			std::cout << e + 1 << ") " << hostList[k].vMachines[e].name << "\n";
+		}
 	}
 
 
